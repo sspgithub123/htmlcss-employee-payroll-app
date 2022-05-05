@@ -2,12 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <link rel="stylesheet" href="../css/home.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,
           400;0,600;1,500&display=swap" rel="stylesheet">
-    <title>Employee payroll App</title>
+    <title>Employee payroll App</title>   
   </head>
   <body>
     <header class="header-content header">
@@ -27,34 +27,12 @@
         <a href="../pages/payroll_form.html" class="add-button">
         <img src="../assets/icons/add-24px.svg" alt="">Add User</a>
       </div>
-      <table id="disply" class="table">
-        <tr>
-          <th></th>
-          <th>Name</th>
-          <th>Gender</th>
-          <th>Department</th>
-          <th>Salary</th>
-          <th>Start Date</th>
-          <th>Actions</th>
-        </tr>
-        <tr>
-          <td>
-            <img class="profile" alt="" src="../assets/profile-images/Ellipse -8.png">
-          </td>
-          <td>Ashvini Kanojia</td>
-          <td>Male</td>
-          <td><div class="dept-label">Finance</div>
-              <div class="dept-label">Engineer</div></td>
-          <td>499999</td>
-          <td>1 Jan 2016</td>
-          <td>
-            <img id="1" onclick="removie(this)" alt="delete" 
-                  src="../assets/icon/delete-black-18dp.svg">
-            <img id="1" alt="edit" onclick="update(this)"
-                  src="../assets/icon/create-black-18dp.svg">
-          </td>
-        </tr>
+      <div id="table-main">
+      <table id="table-display" class="table">
       </table>
     </div>
+    </div>
+    <script src="../js/home.js"></script>
+    <script src="../js/EmployeePayroll.js"></script>
   </body>
 </html>
