@@ -1,74 +1,86 @@
+let empPayrollList;
 window.addEventListener('DOMContentLoaded',(event) => {
+  empPayrollList = getEmployeePayrollDataFromStorage();
+  // console.log(empPayrollList.length);
+  document.querySelector(".emp-count").textContent = empPayrollList.length;
   createInnerHtml();
-  });
-  
-  const createInnerHtml = () => {
-    const headerHtml = ` 
-      <th></th>
-      <th>Name</th>
-      <th>Gender</th>
-      <th>Department</th>
-      <th>Salary</th>
-      <th>Start Date</th>
-      <th>Actions</th>
-    `;
-    let innerHtml = `${headerHtml}`;
-    let empPayrollList = createEmployeePayrollJSON();
-    for(const empPayrollData of empPayrollList)
-    {
-    innerHtml = `${innerHtml}
-    <tr>
-        <td>
-        <img class="profile" alt="" src="${empPayrollData._profilePic}">
-        </td>
-        <td>${empPayrollData._name}</td>
-        <td>${empPayrollData._gender}</td>
-        <td><div class="dept-label">${getDeptHtml(empPayrollData._department)}</div></td>
-        <td>${empPayrollData._salary}</td>
-        <td>${empPayrollData._startDate}</td>
-        <td>
-        <img id="${empPayrollData._id}" src="../assets/icon/delete-black-18dp.svg" alt="delete" onclick="remove(this)">
-        <img id="${empPayrollData._id}" src="../assets/icon/create-black-18dp.svg" alt="edit" onclick="update(this)">
+  localStorage.removeItem('editEmp');
+});
+
+const getEmployeePayrollDataFromStorage = () => {
+  return localStorage.getItem("EmployeePayrollList") ?
+                      JSON.parse(localStorage.getItem('EmployeePayrollList')) : [];
+}
+
+const createInnerHtml = () => {
+  const headerHtml = ` 
+    <th></th>
+    <th>Name</th>
+    <th>Gender</th>
+    <th>Department</th>
+    <th>Salary</th>
+    <th>Start Date</th>
+    <th>Actions</th>
+  `;
+  if(empPayrollList.length == 0) return;
+  let innerHtml = `${headerHtml}`;
+  for(const empPayrollData of empPayrollList)
+  {
+  innerHtml = `${innerHtml}
+  <tr>
+      <td>
+      <img class="profile" alt="" src="${empPayrollData._profilePic}">
       </td>
-    </tr>
-    `;
-    }
-  document.querySelector('#table-display').innerHTML = innerHtml;
+      <td>${empPayrollData._name}</td>
+      <td>${empPayrollData._gender}</td>
+      <td>${getDeptHtml(empPayrollData._department)}</td>
+      <td>${empPayrollData._salary}</td>
+      <td>${stringifyDate(empPayrollData._startDate)}</td>
+      <td>
+      <img name="${empPayrollData._id}" onclick="removie(this)" alt="delete" 
+              src="../assets/icons/delete-black-18dp.svg">
+      <img name="${empPayrollData._id}" alt="edit" onclick="update(this)"
+              src="../assets/icons/create-black-18dp.svg">
+      </td>
+  </tr>
+  `;
   }
-  
-  const getDeptHtml = (deptList) => {
-  let deptHtml = '';
-  for(const dept of deptList){
-    deptHtml = `${deptHtml} <div class="dept-label">${dept}</div>`
+document.querySelector('#table-display').innerHTML = innerHtml;
+}
+
+const getDeptHtml = (deptList) => {
+let deptHtml = '';
+for(const dept of deptList){
+  deptHtml = `${deptHtml} <div class="dept-label">${dept}</div>`
+}
+return deptHtml;
+}
+
+const createEmployeePayrollJSON = () => {
+  let empPayrollListLocal = [
+  {
+    _name: 'Ashvini Kanojia',
+    _gender: 'male',
+    _department: [
+      'Finance',
+      'Engineer'
+    ],
+    _salary: '499999',
+    _startDate: '14 May 2016',
+    _note: 'Hi There',
+    _id: new Date().getTime(),
+    _profilePic: '../assets/profile-images/Ellipse -3.png'
+  },
+  {
+    _name: 'Yashraj',
+    _gender: 'female',
+    _department: ['Others'],
+    _salary: '299999',
+    _startDate: '21 Feb 2020',
+    _note: 'Hello',
+    _id: new Date().getTime(),
+    _profilePic: '../assets/profile-images/Ellipse -1.png'
   }
-  return deptHtml;
-  }
-  
-  const createEmployeePayrollJSON = () => {
-    let empPayrollListLocal = [
-    {
-      _name: 'Shubham Pawar',
-      _gender: 'male',
-      _department: [
-        'HR',
-        'Engineer'
-      ],
-      _salary: '395000',
-      _startDate: '5 Feb 2018',
-      _note: 'Hi Shubham',
-      _id: new Date().getTime(),
-      _profilePic: '../assets/profile-images/Ellipse -3.png'
-    },
-    {
-      _name: 'Nisha Pawar',
-      _gender: 'female',
-      _department: ['Engineer'],
-      _salary: '400000',
-      _startDate: '2 Mar 2020',
-      _note: 'Hello',
-      _id: new Date().getTime(),
-      _profilePic: '../assets/profile-images/Ellipse -7.png'
-    }
-    ];
-    return empPayrollListLocal;
-  }
+  ];
+  return empPayrollListLocal;
+}
