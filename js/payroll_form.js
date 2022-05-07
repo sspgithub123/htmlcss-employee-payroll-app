@@ -65,7 +65,7 @@ window.addEventListener('DOMContentLoaded', (event) =>{
     }
     
     function createAndUpdateStorage(employeePayrollData){
-        let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePeyrollList"));
+        let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
     
         if(employeePayrollList != undefined){
             employeePayrollList.push(employeePayrollData);
@@ -75,7 +75,7 @@ window.addEventListener('DOMContentLoaded', (event) =>{
         }
     
         alert(employeePayrollList.toString());
-        localStorage.setItem("EmployeePeyrollList",JSON.stringify(employeePayrollList));
+        localStorage.setItem("EmployeePayrollList",JSON.stringify(employeePayrollList));
     }
     
     const resetForm = () => {
